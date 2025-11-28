@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intégrateur Développeur Web - Portfolio de David Soutarson</title>
+    <link rel="icon" type="image/x-icon" href="images/logoDavid.JPG">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <meta name="description"
+        content="Portfolio CV de David Soutarson - Intégrateur développeur web en reconversion. Formé à l'ESECAD et THP. Compétences en HTML, CSS, JS, PHP, Ruby.">
+    
+    <meta property="og:title" content="CV Intégrateur Développeur Web - David Soutarson">
+    <meta property="og:description"
+        content="Découvrez mon profil, mes formations et compétences techniques en développement web.">
+    <meta property="og:url" content="https://tonsite.fr/cv.html">
+    <meta property="og:type" content="website">   
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <div class="header-top">
+                <img src="images/logoDavid.JPG" alt="logo de David Soutarson" class="logo-header">
+                <h1 class="titre-site"> Intégrateur & Développeur Web &mdash; Portfolio de David Soutarson </h1>
+            </div>
+
+            <div class="header-controls">
+                <!-- Bouton = hors de la nav -->
+                <button id="toggle-theme" aria-label="Activer/désactiver le mode sombre">🌓 Mode sombre</button>
+
+                <!-- Navigation -->
+                <nav class="navigation-horizontal" aria-label="Menu principal"> 
+                    <ul class="navigation-h">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="html/a-propos.html">À propos de moi</a></li>                  
+                        <li><a href="html/cv.html">CV </a></li>
+                        <li><a href="html/projet.html">Projets</a></li>
+                        <li><a href="html/competence.html">Compétences</a></li>
+                        <li><a href="html/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="layout">
+
+            <!-- Contenu principal -->
+            <main class="contenu">
+
+                <section id="a-propos">
+                    <h2 class="th2">Bienvenue sur mon portfolio</h2>
+                    <section>
+                        <h3>David Soutarson</h3>
+                        <p>Intégrateur & Développeur Web</p>
+                    </section>
+                    <p>
+                        Passionné par le développement web, je vous invite à découvrir mon parcours, mes réalisations et mes compétences
+                        techniques.
+                    </p>
+
+                    <p>
+                        Je suis Développeur Web et Mobile, reconverti après plus de dix ans dans l’Hôtellerie-Restauration. Formé et autodidacte en intégration
+                        et développement web et mobile (HTML, CSS, PHP, JavaScript, MySQL, WordPress) et passionné par le code, je crée et
+                        partage mes projets sur GitHub. Curieux et autonome, j’aime relever les challenges techniques et contribuer à des
+                        projets numériques modernes, performants et accessibles.
+                    </p>
+
+                    <p>
+                        Pour en savoir plus, vous pouvez consulter mon CV
+                    </p>
+
+                    <a href="docs/CVats.pdf" download class="btn-cv" title="Téléchargez mon CV au format PDF">📄 Télécharger mon CV</a>
+
+                    <p>
+                        Bonne visite ! N’hésitez pas à me contacter pour une future collaboration.
+                    </p>
+  
+                </section>
+            </main>
+
+            <!-- Sommaire dynamique à droite -->
+            <aside class="sommaire-gauche" role="complementary" aria-label="Sommaire latéral">
+                <h2>Sommaire</h2>
+                <nav class="lateral-col" aria-label="Menu latéral dynamique">
+
+                    <ul class="lateral-menu">
+                        <!-- parti 1 -->
+                        <li>
+                            <a class="survol_souligner" href="index.html">Accueil</a>
+                        </li>
+                        <li>
+                            <a class="survol_souligner" href="html/a-propos.html">À propos de moi</a>
+                        </li>
+                        <!-- parti 2 -->
+                         <li>
+                           <ul class="lateral-sous-menu">
+                                <li>
+                                    <a class="survol_souligner" href="html/cv.html">CV</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+                        <!-- partie 3 -->
+                        <li>
+                            Compétences & Projets
+                            <ul class="lateral-sous-menu">
+                                <li>
+                                    <a class="survol_souligner" href="html/competence.html">Compétences
+                                    techniques</a>
+                                </li>
+                                <li>
+                                    <a class="survol_souligner" href="html/projet.html">Projets</a>
+                            </li>
+                        </ul>
+
+                        </li>
+                        <!-- partie 4 -->
+                        <li>
+                            <a class="survol_souligner" href="html/contact.html">Contact</a>
+                        </li>
+                    </ul>      
+                </nav>
+            </aside>
+        </div>
+
+        <!-- bouton de changemne de page pour un navigation de tipe livre -->
+        <div class="carrousel-controls" aria-label="Navigation du livre" aria-live="polite">
+            <div class="carrousel-boutons">
+                <button id="prevPage">◀ Page précédente</button>
+                <button id="nextPage">Page suivante ▶</button>
+            </div>
+        </div>
+
+        <footer>
+            <h2>Technologies utilisées sur ce site</h2>
+            <ul class="technos-utilise">
+                <li class="listDetechno"><img src="images/logoHTML5.png" class="logoLangageWeb" alt="logo langage web HTML"> HTML5 </li>
+                <li class="listDetechno"><img src="images/logoCSS3.png" class="logoLangageWeb" alt="logo langage web CSS3"> CSS3 </li>
+                <li class="listDetechno"><img src="images/logoSASS.png" class="logoLangageWeb" alt="logo langage web SCSS Sass"> SCSS </li>
+                <li class="listDetechno"><img src="images/logoJS.png" class="logoLangageWeb" alt="logo langage web JS"> JavaScript </li>
+                <li class="listDetechno"><img src="images/logoGITHUB.png" class="logoLangageWeb" alt="logo outile de vertion GitHub"> GitHub </li>    
+            </ul>
+            <p>© 2025 David Soutarson</p>
+            <button id="btn-retour-haut" class="btn-retour-haut" title="Retour en haut de page">
+                ⬆ Retour haut
+            </button>
+        </footer>
+    </div>
+
+    <!-- <script src="js/carrousel.js"></script> -- Pour gestion page suivante/précédente -->
+    <script src="js/darkMod.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/changerDePage.js"></script>
+   <!--  <script src="js/boutonDesactiver.js"></script> b master -->
+</body>
+<!-- orthographe verifier page index ok -->
+</html>

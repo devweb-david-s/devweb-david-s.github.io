@@ -1,0 +1,742 @@
+// =======================================================
+// Variables globales
+// =======================================================
+
+// Couleurs principales
+$couleur-principale: rgba(52, 152, 219, 1);
+$couleur-principale-claire: rgba(52, 152, 219, 0.1);
+$couleur-secondaire: rgba(231, 76, 60, 1);
+$couleur-survol: rgba(41, 128, 185, 1);
+$couleur-soulignement: rgba(52, 152, 219, 0.6);
+
+// Fonds
+$fond-principal: rgba(255, 255, 255, 1);
+$fond-secondaire: rgba(245, 245, 245, 1);
+$fond-noir: rgba(18, 18, 18, 1);
+$fond-beige: rgb(173, 159, 148);
+$fond-secondaire-noir: rgba(50, 50, 50, 1);
+$menu-lateral-fond: rgb(33, 33, 33);
+
+// Textes
+$texte-principal: rgba(33, 33, 33, 0.9);
+$texte-secondaire: rgba(100, 100, 100, 0.7);
+$menu-texte: rgb(255, 255, 255);
+$menu-texte-actif: $couleur-principale;
+
+// Bordures et ombres
+$gris-clair: rgba(200, 200, 200, 1);
+$ombre-legere: rgba(0, 0, 0, 0.1);
+
+// Variations
+@use "sass:color";
+$blanc-claire: color.scale(#f5f5f5, $lightness: 10%);
+$blanc-plus-claire: color.scale(#f5f5f5, $lightness: 20%);
+$blanc-tres-claire: color.scale(#f5f5f5, $lightness: 30%);
+$texte-secondaire-claire: color.scale($texte-secondaire, $lightness: 10%);
+$texte-secondaire-moyen-claire: color.scale($texte-secondaire, $lightness: 20%);
+$texte-secondaire-tres-claire: color.scale($texte-secondaire, $lightness: 30%);
+$fond-noir-claire: color.scale($fond-noir, $lightness: 10%);
+
+// =======================================================
+// Mixins réutilisables
+//galerie-projet
+// =======================================================
+
+@mixin bouton-principal($bg: $couleur-principale, $color: white) {
+    background-color: $bg;
+    color: $color;
+    padding: 0.5rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background-color: $couleur-survol;
+    }
+}
+
+@mixin effet-empilement($offset-right, $border-color) {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: $offset-right;
+    width: 100%;
+    height: 100%;
+    background-color: $fond-secondaire;
+    border-bottom: 2px double $border-color;
+    border-right: 2px double $border-color;
+    z-index: -2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+// =======================================================
+// Reset CSS
+// =======================================================
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+  /*   box-sizing: border-box;
+    border-collapse: collapse; */
+}
+
+
+.th2 {
+    font-size: 1.8rem;
+    color: $texte-principal;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid $couleur-soulignement;
+    padding-bottom: 0.3em;
+}
+
+
+
+// =======================================================
+// Styles globaux
+// =======================================================
+
+body {
+    background-image: url(../images/textureCircuitImprimé.png); /* Image de fond subtile */
+    background-repeat: repeat; /* répète l’image dans les deux directions */
+    background-color: $fond-beige;
+    font-family: Arial, sans-serif;
+}
+
+address,
+strong {
+    font-style: normal;
+}
+
+a {
+    color: $couleur-principale;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $couleur-survol;
+        text-decoration: underline;
+    }
+}
+
+// Listes
+.list-normale {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin: 0.5em 0 0.5em 1em;
+
+    li {
+        list-style-type: disc;
+    }
+
+    ul {
+        list-style-type: circle;
+        padding-left: 1.5em;
+        margin: 0.5em 0 0.5em 1em;
+
+        li {
+            list-style-type: circle;
+        }
+    }
+}
+
+.doubleTab {
+    margin: 0.5em 0 0.5em 4em;
+}
+
+
+
+// =======================================================
+// Wrapper & Layout
+// =======================================================
+
+#wrapper {
+    width: 95%;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 0.5em;
+    
+
+    .logo-header {
+        width: 160px;
+        height: auto;
+        border-radius: 5%;
+        display: block;
+    }  
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-top: 5px;
+}
+
+.header-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    align-items: center
+}
+
+// =======================================================
+// Mode sombre
+// =======================================================
+
+//bouton mode sombre
+#toggle-theme {
+    @include bouton-principal($fond-secondaire, $texte-principal);
+     margin-right: 5%; 
+}
+
+// =======================================================
+// Contien les Modification du Mode sombre
+// =======================================================
+
+body.dark {
+    background-image: url(../images/textureCircuitImprimé.png);
+    background-color: $fond-noir;
+    color: #f5f5f5;
+
+    // 🔹 Mode sombre
+    .contenu,
+    #a-propos {
+        background-color: $fond-secondaire-noir;
+        border-color: $blanc-tres-claire;
+
+        &::before {
+            @include effet-empilement(4px, $blanc-claire);
+        }
+
+        &::after {
+            @include effet-empilement(11px, $blanc-claire);
+            z-index: -1;
+        }
+
+        a {
+            color: $blanc-plus-claire;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: $couleur-principale;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Mode sombre
+    .sommaire-gauche {
+        background-color: $fond-noir-claire;
+        color: #f5f5f5;
+
+        .survol_souligner:hover {
+            color: $couleur-principale;
+        }
+    }
+
+    //Mode sombre
+    .bloc-article,
+    #contact,
+    .bloc-contact {
+        background-color: $fond-secondaire-noir;
+        border: 1px solid $fond-noir-claire;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+        h3,
+        p,
+        li {
+            color: #f5f5f5;
+        }
+
+        &:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+            transform: translateY(-3px);
+        }
+    }
+}
+
+//====== fin mode sombre ======================================
+
+// =======================================================
+// Navigation horizontale    
+// =======================================================
+
+.navigation-horizontal {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+
+    .navigation-h {
+        display: flex;
+
+        a {
+            @include bouton-principal();
+            margin: 0.5em;
+        }
+    }
+}
+
+// =======================================================
+// Layout principal
+// =======================================================
+
+.layout {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+// =======================================================
+// Contenu principal
+// =======================================================
+
+.contenu {
+    position: relative;
+    display: flex;
+    background-color: $fond-secondaire;
+    width: 50%;
+    border-bottom: 2px solid $texte-secondaire;
+    border-right: 2px solid $texte-secondaire;
+    padding: 0.5em;
+    z-index: 1;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+
+    
+
+
+    &::before {
+        @include effet-empilement(4px, $texte-secondaire-claire);
+    }
+
+    &::after {
+        @include effet-empilement(11px, $texte-secondaire-moyen-claire);
+    }
+
+    #a-propos {
+        margin-right: 0.5em;
+        height: 550px; //teste hauteur fixe
+        overflow-y: auto; //teste scroll vertical
+    }
+
+    #a-propos,
+    p{
+        margin: 0.5em;
+    }
+
+    .cv_graphique_col_droit {
+        width: 80%;
+        margin-left: 1em;
+    }
+}
+
+// =======================================================
+// CV spécifique
+// =======================================================
+
+.centrer_souligner {
+    text-align: center;
+    padding: 1em;
+    border-bottom: 2px solid $couleur-soulignement;
+}
+
+.sans_retours {
+    white-space: nowrap;
+}
+
+.souligner {
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid $couleur-soulignement;
+}
+
+// =======================================================
+// Sommaire gauche
+// =======================================================
+
+.sommaire-gauche {
+    background-color: $menu-lateral-fond;
+    color: $menu-texte;
+    width: 20%;
+   border-right:2em solid transparent; 
+   border-image-source:url("../images/SpiraleBordure2.PNG");
+   border-image-slice: 100;
+   border-image-repeat: repeat;
+   z-index: 1;
+
+    .lateral-col {
+        margin-left: 1.5em;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 1em;
+
+        .lateral-menu,
+        .lateral-sous-menu {
+           
+            list-style: none;
+            display: inline;
+
+            li {
+                margin: 1em 0;
+
+                .survol_souligner {
+                    color: $menu-texte;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: $menu-texte-actif;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .lateral-sous-menu li {
+            padding-left: 5%;
+        }
+    }
+}
+
+// =======================================================
+// Bouton retour haut
+// =======================================================
+
+.btn-retour-haut {
+    @include bouton-principal($fond-secondaire, $texte-principal);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+// =======================================================
+// Articles
+// =======================================================
+
+.bloc-article {
+    background-color: $fond-principal;
+    border: 1px solid $gris-clair;
+    border-radius: 8px;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    box-shadow: 0 4px 8px $ombre-legere;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    h3 {
+        margin-bottom: 0.8em;
+        color: $texte-principal;
+    }
+
+    p,
+    li {
+        color: $texte-secondaire;
+        line-height: 1.5;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+// =======================================================
+// Carrousel
+// =======================================================
+
+.carrousel-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin: 0.5em;
+
+    .carrousel-boutons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 50%;
+        margin-right: 15%;
+
+        button {
+            @include bouton-principal();
+        }
+    }
+}
+
+
+// =======================================================
+// Galerie projets
+// =======================================================
+
+.galerie-projet {
+    border: 2px solid $texte-secondaire;
+    border-radius: 8px;
+    padding: 0.5em;
+}
+
+.boxImage {
+    display: flex;
+    position: relative; /* nécessaire pour positionner le message */
+
+    &:hover { /* Survol de la boxImage */
+        box-shadow: 5px 5px 5px $texte-secondaire;
+
+        .description {
+            color: $texte-principal;
+        }
+        .message-zoom {
+            opacity: 1; /* rendu visible au survol */
+        }
+    }
+
+    .message-zoom {
+        position: absolute;
+        bottom: 25%;
+        left: 30%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: $couleur-secondaire;
+        padding: 0.2em 0.5em;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        opacity: 0; // initialement invisible
+        transition: opacity 0.3s ease;
+        pointer-events: none; /* évite que le texte bloque le hover */
+    }
+}
+
+.imageProjet {
+    display: block;
+    width: 45%;
+    margin: 0.5em;
+    border-bottom: 2px solid $texte-secondaire;
+    border-right: 2px solid $texte-secondaire;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 5px 5px 5px $texte-secondaire;
+    }
+
+    &.agrandie {
+        transform: scale(2.4) translateX(25%);
+        z-index: 1000;
+        position: relative;
+        box-shadow: none;
+    }
+}
+
+.shifoumi {
+    width: 30%;
+}
+
+
+
+
+#contact {
+    display: flex;
+    margin: 1em;
+    width: 100%;
+    height: 60%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .contacter {
+        align-self: flex-start;
+        width: 100%;
+    }
+
+    .bloc-contact{
+        display: flex;
+        margin-bottom: 1em;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    
+}
+
+.formulaire-contact{
+    
+    
+    fieldset{
+        margin: 0px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin-bottom: 1em;
+        border: 1px solid $gris-clair;
+        border-radius: 8px;
+        padding: 1em;
+    } 
+}
+
+// =======================================================
+// Footer
+
+.technos-utilise{
+    display: flex;
+    align-items: center;
+    margin: 0.5em 0;
+    
+}
+
+.listDetechno{
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    background-color: $ombre-legere;
+    
+}
+
+.logoLangageWeb{
+    width: 40px;
+    height: 30px;
+    margin: 0 0.5em;
+}
+
+// =======================================================
+// Fin des styles globaux
+
+// =======================================================
+// Media Queries
+// =======================================================
+
+@media (min-width: 1024px) {
+    .layout {
+        min-height: 600px;
+    }
+}
+
+@media (max-width: 830px) {
+    #wrapper {
+        width: 100%;
+        padding: 0.5em;
+    }
+
+    .navigation-horizontal {
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .burger-btn {
+            display: block;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            position: relative;
+
+            span {
+                display: block;
+                height: 3px;
+                background-color: $couleur-principale;
+                margin: 5px 0;
+                border-radius: 2px;
+                transition: all 0.3s ease;
+            }
+        }
+
+        .navigation-h {
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: $fond-principal;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+
+            li a {
+                width: 100%;
+                text-align: center;
+                padding: 0.6rem 0;
+                display: block;
+            }
+        }
+
+        &.active .navigation-h {
+            max-height: 500px;
+        }
+    }
+
+    .layout {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .contenu {
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+        background-color: $fond-secondaire;
+        border-bottom: 2px solid $texte-secondaire;
+        border-right: 2px solid $texte-secondaire;
+        position: relative;
+    }
+
+    .sommaire-gauche {
+        display: none;
+    }
+
+    .bloc-article {
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+
+    .carrousel-controls {
+        display: block;
+
+        .carrousel-boutons {
+            display: block;
+            text-align: center;
+            width: 100%;
+
+            button {
+                margin: 0.5em;
+            }
+        }
+    }
+
+    .btn-retour-haut {
+        bottom: 10px;
+        right: 10px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .galerie-projet {
+        padding: 0.3em;
+        border-width: 1px;
+    }
+
+    .boxImage {
+        display: block; // empile les images verticalement
+        margin-bottom: 1em;
+        box-shadow: none;
+
+        .message-zoom {
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem; // texte plus petit pour mobile
+            padding: 0.15em 0.4em;
+        }
+    }
+
+    .imageProjet {
+        width: 60%; // image plus grande sur mobile
+        margin: 0.5em auto; // centrée
+        display: block;
+
+        &.agrandie {
+            transform: scale(2); // zoom un peu moins fort sur mobile
+        }
+    }
+}

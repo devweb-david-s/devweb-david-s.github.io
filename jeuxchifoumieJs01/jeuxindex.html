@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pierre Feuille Ciseaux </title>
+    <link rel="stylesheet" href="css/master.css">
+  </head>
+  <body>
+    <h1>Le jeu du Chifoumi</h1>
+
+    
+    <div id= 'zoneJeux'>
+
+      <!-- <button type="button" name="button"></button> -->
+      <button class="choice">Pierre</button>
+      <button class="choice">Feuille</button>
+      <button class="choice">Ciseaux</button>
+      <!-- bonuse du puie !!! -->
+      <button class="choice puit">Puit</button>
+      
+
+      <div id="scoreBoard">
+        <h2>Score</h2>
+        <p id="playerScore">Joueur: 0</p>
+        <p id="robotScore">Robot: 0</p>
+        <button id="resetBtn">Reste Score</button>
+      </div>
+
+      <div class="resulta"> 
+        <p>Click sur Pierre Feuille Ciseaux pour demarer !</p>
+      </div>
+
+    </div>
+    <script >
+
+    // sélectionner uniquement les boutons de jeu (exclut le bouton Réinitialiser)
+    const buttons = document.querySelectorAll("button.choice");
+
+    // Scores
+    let playerScore = 0;
+    let robotScore = 0;
+
+    function updateScore(winner) {
+      if (winner === 'player') playerScore += 1;
+      else if (winner === 'robot') robotScore += 1;
+      // mise à jour de l'affichage
+      const p = document.getElementById('playerScore');
+      const r = document.getElementById('robotScore');
+      if (p) p.textContent = `Joueur: ${playerScore}`;
+      if (r) r.textContent = `Robot: ${robotScore}`;
+    }
+
+    function resetScore() {
+      playerScore = 0;
+      robotScore = 0;
+      const p = document.getElementById('playerScore');
+      const r = document.getElementById('robotScore');
+      if (p) p.textContent = `Joueur: 0`;
+      if (r) r.textContent = `Robot: 0`;
+    }
+
+    // Ajouter événement au bouton Réinitialiser
+    const resetBtn = document.getElementById('resetBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', resetScore);
+    }
+
+    // Associer chaque choix avec son image
+      function getImage(choice) {
+        switch (choice) {
+          case "Pierre": return "imagesJeux/Pierre.png";
+          case "Feuille": return "imagesJeux/Feuille.png";
+          case "Ciseaux": return "imagesJeux/Ciseau.png";
+          case "Puit": return "imagesJeux/PuitsEnPierre.png";
+        }
+      }
+
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click",function(){
+
+        const joueur = buttons[i].innerHTML;//console.log(joueur);
+        const robot = buttons[Math.floor(Math.random() * buttons.length)].innerHTML;
+
+        let resulta ="";
+        // outcome: 'player' | 'robot' | 'tie'
+        let outcome = 'tie';
+        
+        //logique du jeux
+        if (joueur === robot) {
+          resulta = "<p class= 'egalite'>Egalité </p>";
+          outcome = 'tie';
+        }
+        else if ((joueur === "Pierre" && robot === "Ciseaux")
+        || (joueur === "Feuille" && robot === "Pierre")
+        || (joueur === "Ciseaux" && robot === "Feuille") ) {
+          resulta = "<p class='joueur' > Gagné </p>";
+          outcome = 'player';
+        }
+        else if ((joueur === "Puit" && robot === "Ciseaux")
+        || (joueur === "Puit" && robot === "Pierre")) {
+          resulta = "<p class= 'purple'>Gagné avec la tenique secréte";
+          outcome = 'player';
+        }
+        else if ((robot === "Puit" && joueur === "Ciseaux" ) ||(robot === "Puit" && joueur === "Pierre" ) ) {
+            resulta = "<p class='perdu'> Perdu </p> <p class='robot'>Le Robot conais tout les secréte du jeux ! </br> Ariverez vous a les trouver ? <p>";
+            outcome = 'robot';
+          }
+        else if ((robot === "Puit" && joueur === "Feuille" ) ) {
+          resulta = "<p class='joueur'>Ganier la Feuille bouche le Puit </p> <p class ='robot'> - Le Robot a tenter le Puit . </br> -- Il et tomber dedan HA HA HA ... </br> --- Bien jouer humain ! </p>";
+          // joueur gagne ici
+          outcome = 'player';
+        }
+         else if ((joueur === "Puit" && robot === "Feuille" )) {
+          resulta = "<p class='joueur'> Vous aver Perdu la Feuille bouche le Puit </p> <p class='robot'> -Le Robot conais tout les secréte du jeux <br> -- all your base are belong to us </br> --- HA HA HA .... </p>";
+          outcome = 'robot';
+        }
+        else {
+            resulta = "<p class='perdu'> Perdu </p>";
+            outcome = 'robot';
+          }
+
+        // mettre à jour le score selon l'issue
+        updateScore(outcome);
+
+        // ---- AFFICHAGE du résultat + images ----
+        document.querySelector(".resulta").innerHTML = `
+        
+        <div class="couteJouer">
+          <div class="joueurDiv">
+            <h3>Joueur :</h3>
+            <img src="${getImage(joueur)}" ><br>
+            ${joueur}
+          </div>
+          <h3>VS</h3>
+          <div class="robotDiv">
+            <h3>Robot :</h3>
+            <img src="${getImage(robot)}" ><br>
+            ${robot}
+          </div>
+        </div>
+        
+        <div>
+        ${resulta}
+        </div>
+        `;
+        //console.log(`joueur : ${joueur} VS Robot : ${robot}`);
+
+      });
+    }
+    </script>
+
+  </body>
+</html>

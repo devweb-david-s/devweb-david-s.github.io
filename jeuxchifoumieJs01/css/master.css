@@ -1,0 +1,101 @@
+.puit {
+  color: transparent;
+  background-color: transparent;
+   border: none;
+  outline: none;
+}
+
+.robot{
+  color: green;
+  background-color: black;
+}
+
+.joueur{
+  padding: 5px;
+  text-align: center;
+  color: orange;
+  background-color: black;
+}
+
+.egalite{
+  padding: 5px;
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+
+.perdu{
+  padding: 5px;
+  text-align: center;
+  color: red;
+  background-color: black;
+}
+
+.purple{
+  padding: 5px;
+  text-align: center;
+  color: purple;
+  background-color: black;
+}
+
+#zoneJeux{
+  margin: 0 auto;
+  padding: 10px;
+  width: 400px;
+  height: 650px;
+  border: dashed red 2px;
+}
+
+button {
+  width: 80px;
+  height: 80px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#scoreBoard{
+  display: flex;
+  margin-bottom: 5px;
+  padding: 5px;
+  border: solid blue 2px;
+  justify-content: space-between;
+  align-items: center
+}
+
+#resetBtn{
+  margin-top: 5px;
+  padding: 5px;
+  border: solid black 2px;
+  color: white;
+  background-color: green;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.couteJouer{
+  display: flex;
+  margin-top: 5px;
+  padding: 10px;
+  border: solid yellow 2px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.joueurDiv, .robotDiv{
+  display: flex;
+  width: 35%;
+  height: 300px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+} 
+
+img{
+  max-width: 150px;
+  max-height: 150px;
+  padding: 10px;
+  align-self: center;
+} 
