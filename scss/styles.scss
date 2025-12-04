@@ -548,7 +548,7 @@ body.dark {
 
     .contacter {
         align-self: flex-start;
-        width: 100%;
+        width: 90%;
     }
 
     .bloc-contact{
@@ -613,7 +613,7 @@ body.dark {
     }
 }
 
-@media (max-width: 830px) {
+@media (max-width: 400px) {
     #wrapper {
         width: 100%;
         padding: 0.5em;
@@ -739,4 +739,27 @@ body.dark {
             transform: scale(2); // zoom un peu moins fort sur mobile
         }
     }
+
+        // Footer
+    
+        .technos-utilise {
+            display: flex;
+            align-items: center;
+            margin: 0.5em 0;
+    
+        }
+    
+        .listDetechno {
+            display: flex;
+            align-items: center;
+            font-size: 0.6rem;
+            background-color: $ombre-legere;
+    
+        }
+    
+        .logoLangageWeb {
+            width: 30px;
+            height: 30px;
+            margin: 0 0.5em;
+        }
 }
