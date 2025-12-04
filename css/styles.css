@@ -505,6 +505,9 @@ body.dark .bloc-contact:hover {
     width: 100%;
     padding: 0.5em;
   }
+  .titre-site {
+    font-size: 1.5rem;
+  }
   .navigation-horizontal {
     position: relative;
     flex-direction: row;
